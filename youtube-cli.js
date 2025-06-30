@@ -1,7 +1,10 @@
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-extra';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
 import cliProgress from 'cli-progress';
+
+puppeteer.use(StealthPlugin());
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -72,9 +75,32 @@ async function main() {
     const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
 
-    const loadingInterval = showLoading('Navigating to turboscribe.ai...');
-    await page.goto('https://turboscribe.ai/downloader/youtube/mp4', { waitUntil: 'networkidle2' });
-    stopLoading(loadingInterval);
+    let loadingInterval;
+    try {
+        loadingInterval = showLoading('Navigating to turboscribe.ai...');
+        await page.goto('https://turboscribe.ai/downloader/youtube/mp4', { waitUntil: 'networkidle2', timeout: 60000 });
+        stopLoading(loadingInterval);
+    } catch (err) {
+        stopLoading(loadingInterval);
+        console.log(chalk.red.bold('\n❌ Error: Failed to navigate to turboscribe.ai.'));
+        if (err instanceof Error && err.message.includes('Timeout')) {
+            console.log(chalk.red('Navigation timed out. The site may be slow or blocking automated browsers.'));
+        } else {
+            console.log(chalk.red(err.message));
+        }
+        await browser.close();
+        showFooter();
+        return;
+    }
+
+    try {
+        await page.waitForSelector('input[name="url"]', { timeout: 20000 });
+    } catch (err) {
+        console.log(chalk.red.bold('\n❌ Error: input[name="url"] not found after waiting.'));
+        await browser.close();
+        showFooter();
+        return;
+    }
 
     const loadingInput = showLoading('Filling and submitting the form...');
     await page.type('input[name="url"]', youtubeUrl);

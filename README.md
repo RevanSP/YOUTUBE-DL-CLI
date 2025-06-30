@@ -1,6 +1,6 @@
 # YouTube MP4 Downloader CLI Tool
 
-A beautiful, interactive CLI tool to extract and display YouTube video and audio download links (with details like type, resolution, and size) from turboscribe.ai. Built with Puppeteer, Inquirer, Chalk, and cli-progress. Created by ReiivanTheOnlyOne.
+A beautiful, interactive CLI tool to extract and display YouTube video and audio download links (with details like type, resolution, and size) from turboscribe.ai. Built with Puppeteer Extra (with Stealth Plugin), Inquirer, Chalk, and cli-progress. Created by ReiivanTheOnlyOne.
 
 ---
 
@@ -15,6 +15,7 @@ A beautiful, interactive CLI tool to extract and display YouTube video and audio
 
 ## Requirements
 - **Node.js** v18 or higher ([Download Node.js](https://nodejs.org/))
+- **puppeteer-extra** and **puppeteer-extra-plugin-stealth** (installed automatically with npm install)
 - Terminal/Command Prompt/PowerShell (Windows) or Terminal/Termux (Linux/Android)
 
 ---
@@ -31,6 +32,7 @@ A beautiful, interactive CLI tool to extract and display YouTube video and audio
 2. **Install Dependencies**
    ```sh
    npm install
+   # (installs puppeteer-extra, puppeteer-extra-plugin-stealth, and all other dependencies)
    ```
 
 ---
@@ -102,4 +104,4 @@ Created with ❤️  by ReiivanTheOnlyOne
 
 ## Credits
 - Created by ReiivanTheOnlyOne
-- Uses [Puppeteer](https://github.com/puppeteer/puppeteer), [Inquirer](https://github.com/SBoudrias/Inquirer.js/), [Chalk](https://github.com/chalk/chalk), [cli-progress](https://github.com/AndiDittrich/Node.CLI-Progress) 
+- Uses [puppeteer-extra](https://github.com/berstend/puppeteer-extra), [puppeteer-extra-plugin-stealth](https://github.com/berstend/puppeteer-extra/tree/master/packages/puppeteer-extra-plugin-stealth), [Inquirer](https://github.com/SBoudrias/Inquirer.js/), [Chalk](https://github.com/chalk/chalk), [cli-progress](https://github.com/AndiDittrich/Node.CLI-Progress) 
