@@ -1,0 +1,11 @@
+{
+  "name": "spotify-cli",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "puppeteer": "^24.11.1",
+    "inquirer": "^12.6.3",
+    "chalk": "^5.4.1",
+    "cli-progress": "^3.12.0"
+  }
+}
